@@ -6,46 +6,30 @@
         <a-row :gutter="24">
 
           <a-col :md="6" :sm="12">
-            <a-form-item label="客户名称">
-              <a-input placeholder="请输入客户名称" v-model="queryParam.customerName"></a-input>
+            <a-form-item label="老人姓名">
+              <a-input placeholder="请输入老人姓名" v-model="queryParam.customerName"></a-input>
             </a-form-item>
           </a-col>
 
           <a-col :md="6" :sm="8">
-            <a-form-item label="添加时间">
-              <a-input placeholder="请选择时间" v-model="queryParam.createTime"></a-input>
-            </a-form-item>
-          </a-col>
-
-          <a-col :md="6" :sm="8">
-            <a-form-item label="客户状态">
-              <a-select v-model="queryParam.customerStatus" placeholder="请选择客户状态">
-                <a-select-option value="">请选择</a-select-option>
-                <a-select-option value="1">入驻中</a-select-option>
-                <a-select-option value="2">退驻</a-select-option>
-              </a-select>
+            <a-form-item label="入驻时间">
+              <a-input placeholder="请选择入驻时间" v-model="queryParam.createTime"></a-input>
             </a-form-item>
           </a-col>
 
           <template v-if="toggleSearchStatus">
-
             <a-col :md="6" :sm="8">
-              <a-form-item label="账户状态">
-                <a-select v-model="queryParam.accountStatus" placeholder="请选择账户状态">
+              <a-form-item label="状态">
+                <a-select v-model="queryParam.customerStatus" placeholder="请选择状态">
                   <a-select-option value="">请选择</a-select-option>
-                  <a-select-option value="1">正常</a-select-option>
-                  <a-select-option value="2">冻结</a-select-option>
+                  <a-select-option value="1">在驻</a-select-option>
+                  <a-select-option value="2">退驻</a-select-option>
                 </a-select>
               </a-form-item>
             </a-col>
-
             <a-col :md="6" :sm="8">
-              <a-form-item label="套餐">
-                <a-select v-model="queryParam.packageName" placeholder="请选择套餐">
-                  <a-select-option value="">套餐1</a-select-option>
-                  <a-select-option value="1">套餐2</a-select-option>
-                  <a-select-option value="2">套餐3</a-select-option>
-                </a-select>
+              <a-form-item label="地址">
+                <a-input placeholder="请输入地址" v-model="queryParam.customerName"></a-input>
               </a-form-item>
             </a-col>
           </template>
@@ -66,7 +50,7 @@
 
     <!-- 操作按钮区域 -->
     <div class="table-operator" style="border-top: 5px">
-      <a-button @click="handleAdd" type="primary" icon="plus">添加客户</a-button>
+      <a-button @click="handleAdd" type="primary" icon="plus">添加老人</a-button>
       <a-dropdown v-if="selectedRowKeys.length > 0">
         <a-menu slot="overlay" @click="handleMenuClick">
           <a-menu-item key="1">
@@ -120,16 +104,11 @@
             </a>
             <a-menu slot="overlay">
               <a-menu-item>
-                <a href="javascript:;" @click="handlePackage(record)">套餐</a>
+                <a href="javascript:;" @click="handlePackage(record)">消费明细</a>
               </a-menu-item>
               <a-menu-item>
                 <a href="javascript:;" @click="handleDetail(record)">详情</a>
               </a-menu-item>
-
-              <a-menu-item>
-                <a href="javascript:;" @click="handleChangePassword(record.customerName)">密码</a>
-              </a-menu-item>
-
               <a-menu-item>
                 <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
                   <a>删除</a>
@@ -184,52 +163,58 @@
         },
         columns: [
           {
-            title: '客户名称',
+            title: '姓名',
             align: 'center',
             dataIndex: 'customerName',
             width: 120
           },
           {
-            title: '客户状态',
+            title: '性别',
             align: 'center',
             width: 100,
             dataIndex: 'status',
             customRender (t) {
-              const sexMap = { 1: '入驻中', 2: '退驻'}
+              const sexMap = { 1: '男', 2: '女'}
               return sexMap[t] || ''
             }
           },
           {
-            title: '联系人',
+            title: '年龄',
             align: 'center',
             width: 120,
+            sorter: true,
             dataIndex: 'contact'
           },
-
           {
-            title: '手机号',
+            title: '民族',
             align: 'center',
             width: 100,
             dataIndex: 'mobile'
           },
           {
-            title: '套餐',
-            align: 'center',
-            width: 180,
-            dataIndex: 'packageName'
-          },
-          {
-            title: '账户状态',
+            title: '状态',
             align: 'center',
             width: 100,
             dataIndex: 'accountStatus',
             customRender (t) {
-              const sexMap = {1: '正常', 2: '冻结'}
+              const sexMap = {1: '在驻', 2: '退驻'}
               return sexMap[t] || ''
             }
           },
           {
-            title: '添加时间',
+            title: '床位',
+            align: 'center',
+            width: 100,
+            dataIndex: 'mobile'
+          },
+          {
+            title: '地址',
+            align: 'center',
+            width: 100,
+            dataIndex: 'mobile'
+          },
+          {
+            title: '入驻时间',
             align: 'center',
             width: 150,
             sorter: true,

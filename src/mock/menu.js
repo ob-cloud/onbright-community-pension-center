@@ -7,7 +7,7 @@ export default [
     "children": [
       {
         "path": "/elder/list",
-        "component": "elder/CustomerList",
+        "component": "elder/ElderList",
         "route": "1",
         "meta": {
           "keepAlive": false,
@@ -18,7 +18,7 @@ export default [
       },
       {
         "path": "/elder/approve",
-        "component": "elder/CustomerList",
+        "component": "elder/ElderList",
         "route": "1",
         "meta": {
           "keepAlive": false,
@@ -48,7 +48,7 @@ export default [
         "route": "1",
         "meta": {
           "keepAlive": false,
-          "title": "套餐列表"
+          "title": "机构列表"
         },
         "name": "package-list",
         "id": "4r915b2769fc80648e92d04e84ca059d"
@@ -57,7 +57,7 @@ export default [
     "meta": {
       "keepAlive": false,
       "icon": "setting",
-      "title": "套餐管理"
+      "title": "机构管理"
     },
     "name": "package",
     "id": "o7d6e2e4e2934f2c9385a623fd98c6f3"
