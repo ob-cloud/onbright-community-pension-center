@@ -1,26 +1,37 @@
 export default [
   {
     "redirect": null,
-    "path": "/customer",
+    "path": "/elder",
     "component": "Layouts/RouteView",
     "route": "1",
     "children": [
       {
-        "path": "/customer/list",
-        "component": "customer/CustomerList",
+        "path": "/elder/list",
+        "component": "elder/CustomerList",
         "route": "1",
         "meta": {
           "keepAlive": false,
-          "title": "客户列表"
+          "title": "老人列表"
         },
-        "name": "customer-list",
+        "name": "elder-list",
+        "id": "8r915b2769fc80648e92d04e84ca059d"
+      },
+      {
+        "path": "/elder/approve",
+        "component": "elder/CustomerList",
+        "route": "1",
+        "meta": {
+          "keepAlive": false,
+          "title": "入驻审批"
+        },
+        "name": "elder-approve",
         "id": "8r915b2769fc80648e92d04e84ca059d"
       }
     ],
     "meta": {
       "keepAlive": false,
       "icon": "setting",
-      "title": "客户管理"
+      "title": "老人管理"
     },
     "name": "customer",
     "id": "87d6e2e4e2934f2c9385a623fd98c6f3"
