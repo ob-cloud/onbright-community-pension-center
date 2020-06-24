@@ -95,7 +95,7 @@ export default [
     "route": "1",
     "children": [
       {
-        "path": "/service/list",
+        "path": "/service/content",
         "component": "service/ServiceContent",
         "route": "1",
         "meta": {
