@@ -46,7 +46,7 @@
 <script>
   import Vue from 'vue'
   import { ACCESS_TOKEN } from '@/store/mutation-types'
-  import { getPackageList } from '@/api/service'
+  // import { getPackageList } from '@/api/service'
 
   export default {
     name: 'UserModal',
@@ -98,16 +98,16 @@
         this.modaltoggleFlag = !this.modaltoggleFlag;
       },
       initialPackageList () {
-        getPackageList({
-          column: '',
-          order: true
-        }).then((res) => {
-          if (this.$isAjaxSuccess(res.code)) {
-            this.packageList = res.result.records
-          } else {
-            console.log(res.message)
-          }
-        })
+        // getPackageList({
+        //   column: '',
+        //   order: true
+        // }).then((res) => {
+        //   if (this.$isAjaxSuccess(res.code)) {
+        //     this.packageList = res.result.records
+        //   } else {
+        //     console.log(res.message)
+        //   }
+        // })
       },
       refresh () {
           this.userId = ''

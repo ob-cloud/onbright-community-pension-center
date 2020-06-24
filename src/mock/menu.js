@@ -38,19 +38,19 @@ export default [
   },
   {
     "redirect": null,
-    "path": "/package",
+    "path": "/enterprise",
     "component": "Layouts/RouteView",
     "route": "1",
     "children": [
       {
-        "path": "/package/list",
-        "component": "package/PackageList",
+        "path": "/enterprise/list",
+        "component": "enterprise/EnterpriseList",
         "route": "1",
         "meta": {
           "keepAlive": false,
           "title": "机构列表"
         },
-        "name": "package-list",
+        "name": "enterprise-list",
         "id": "4r915b2769fc80648e92d04e84ca059d"
       }
     ],
@@ -59,7 +59,7 @@ export default [
       "icon": "setting",
       "title": "机构管理"
     },
-    "name": "package",
+    "name": "enterprise",
     "id": "o7d6e2e4e2934f2c9385a623fd98c6f3"
   }
 ]

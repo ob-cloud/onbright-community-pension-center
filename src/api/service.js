@@ -1,50 +1,28 @@
 import { getAction, postAction, deleteAction } from '@/utils/ajax'
 
-const _PREFIX = '/accp'
+const _PREFIX = '/cpc'
 
-////// 客户模块
+////// 机构模块
 
-// 获取客户列表
-const getConsumerList = (params) => getAction(_PREFIX + '/mp/getConsumerList', params)
+// 获取机构列表
+const getEnterpriseList = (params) => getAction(_PREFIX + '/mp/getPackageList', params)
 
-// 获取客户详情信息
-const getConsumerDetail = (id) => getAction(_PREFIX + '/mp/getConsumerDetail', {id})
+// 获取机构详情
+const getEnterpriseDetail = (params) => getAction(_PREFIX + '/mp/getPackageDetail', params)
 
-// 编辑客户信息
-const editConsumer = (params) => postAction(_PREFIX + '/mp/editConsumerInfo', params)
+// 新增机构
+const addEnterprise = (params) => postAction(_PREFIX + '/mp/addPackage', params)
 
-// 删除客户信息
-const delConsumerList = (params) => deleteAction(_PREFIX + '/mp/delConsumerDetail', params)
+// 编辑机构
+const editEnterprise = (params) => postAction(_PREFIX + '/depart/editDepartAdmin', params)
 
-////// 套餐模块
-
-// 获取套餐列表
-const getPackageList = (params) => getAction(_PREFIX + '/mp/getPackageList', params)
-
-// 获取套餐详情
-const getPackageDetail = (params) => getAction(_PREFIX + '/mp/getPackageDetail', params)
-
-// 新增套餐
-const addPackage = (params) => postAction(_PREFIX + '/mp/addPackage', params)
-
-// 编辑套餐
-const editPackage = (params) => postAction(_PREFIX + '/mp/editPackageDetail', params)
-
-// 删除套餐
-const delPackage = (params) => deleteAction(_PREFIX + '/mp/delPackage', params)
-
-// 绑定套餐
-const bindPackage = (params) => postAction(_PREFIX + '/mp/bindPackage', params)
+// 删除机构
+const delEnterprise = (params) => deleteAction(_PREFIX + '/mp/delPackage', params)
 
 export {
-  getConsumerList,
-  getConsumerDetail,
-  editConsumer,
-  delConsumerList,
-  getPackageList,
-  getPackageDetail,
-  addPackage,
-  editPackage,
-  delPackage,
-  bindPackage
+  getEnterpriseList,
+  getEnterpriseDetail,
+  addEnterprise,
+  editEnterprise,
+  delEnterprise
 }

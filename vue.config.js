@@ -54,7 +54,7 @@ module.exports = {
     port: 3001,
     proxy: {
       '/pro/cpc': { // 中台接口
-        target: 'https://aliiot.on-bright.com/mock/37', //mock API接口系统
+        target: 'https://aliiot.on-bright.com/mock/42', //mock API接口系统
         ws: false,
         changeOrigin: true,
         pathRewrite: {

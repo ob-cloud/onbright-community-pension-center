@@ -23,23 +23,43 @@
     <a-spin :spinning="confirmLoading">
       <a-form :form="form">
 
-        <a-form-item label="套餐名称" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-input placeholder="请输入套餐名称" v-decorator="[ 'packageName', validatorRules.packageName]" :readOnly="!!model.id" />
+        <a-form-item label="机构账号" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <a-input placeholder="请输入机构账号" v-decorator="[ 'departAccount', validatorRules.departAccount]" :readOnly="disableSubmit" />
         </a-form-item>
 
-        <a-form-item label="套餐价格" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-input placeholder="请输入登陆密码" v-decorator="[ 'packagePrice', validatorRules.packagePrice]" />
+        <template v-if="!model.id">
+          <a-form-item label="登陆密码" :labelCol="labelCol" :wrapperCol="wrapperCol">
+            <a-input type="password" placeholder="请输入登陆密码" v-decorator="[ 'passwd', validatorRules.password]" />
+          </a-form-item>
+
+          <a-form-item label="确认密码" :labelCol="labelCol" :wrapperCol="wrapperCol">
+            <a-input type="password" @blur="handleConfirmBlur" placeholder="请重新输入登陆密码" v-decorator="[ 'confirmpassword', validatorRules.confirmpassword]" />
+          </a-form-item>
+        </template>
+
+        <a-form-item label="机构名称" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <a-input placeholder="请输入机构名称" v-decorator="[ 'departName', validatorRules.departName]" :readOnly="disableSubmit" />
         </a-form-item>
 
-        <a-form-item label="套餐状态" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-select v-decorator="[ 'status', {}]" placeholder="请选择套餐状态">
-            <a-select-option :value="1">启用</a-select-option>
-            <a-select-option :value="2">禁用</a-select-option>
-          </a-select>
+        <a-form-item label="联系人" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <a-input placeholder="请输入联系人" v-decorator="[ 'contact', validatorRules.contact]" :readOnly="disableSubmit" />
+        </a-form-item>
+
+        <a-form-item label="联系电话" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <a-input placeholder="请输入联系电话" v-decorator="[ 'mobile', validatorRules.mobile]" :readOnly="disableSubmit" />
+        </a-form-item>
+
+        <a-form-item label="电子邮箱" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <a-input placeholder="请输入电子邮箱" v-decorator="[ 'email', {}]" :readOnly="disableSubmit" />
+        </a-form-item>
+
+        <a-form-item label="公司地址" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <a-input placeholder="请输入公司地址" v-decorator="[ 'address', {}]" :readOnly="disableSubmit" />
         </a-form-item>
 
         <a-form-item label="备注" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-input placeholder="请输入备注" v-decorator="[ 'description', validatorRules.description]" />
+          <a-textarea placeholder="请输入备注" auto-size v-decorator="[ 'memo']" :readOnly="disableSubmit" />
+          <!-- <a-input placeholder="请输入备注" v-decorator="[ 'memo']" /> -->
         </a-form-item>
 
       </a-form>
@@ -55,10 +75,10 @@
 </template>
 
 <script>
-  import pick from 'lodash.pick'
+  // import pick from 'lodash.pick'
   import Vue from 'vue'
   import { ACCESS_TOKEN } from '@/store/mutation-types'
-  import { addPackage, editPackage } from '@/api/service'
+  import { addEnterprise, editEnterprise } from '@/api/service'
   // import { disabledAuthFilter } from "@/utils/authFilter"
 
   export default {
@@ -67,24 +87,38 @@
     },
     data () {
       return {
-        roleDisabled: false, //是否是角色维护调用该页面
         modalWidth: 800,
         drawerWidth: 700,
         modaltoggleFlag: true,
         confirmDirty: false,
-        packageId: '', //保存用户id
+        entityId: '', //保存用户id
         disableSubmit: false,
         dateFormat: 'YYYY-MM-DD',
         validatorRules: {
-          packageName: { rules: [{ required: true, message: '请输入套餐名称!' }] },
-          status: {rules: [{ required: true, message: '请选择套餐状态!' }]},
-          packagePrice: {rules: [{required: true, message: '请填写价格!' }]},
+          departAccount: { rules: [{ required: true, message: '请输入机构账号!' }] },
+          departName: { rules: [{ required: true, message: '请输入机构名称!' }] },
+          contact: { rules: [{ required: true, message: '请输入联系人名称!' }] },
+          mobile: { rules: [{ required: true, message: '请输入联系电话!' }] },
+          password: {
+            rules: [{
+              required: true,
+              pattern:/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[~!@#$%^&*()_+`\-={}:";'<>?,./]).{8,}$/,
+              message: '密码由8位数字、大小写字母和特殊符号组成!'
+            }, {
+              validator: this.validateToNextPassword,
+            }],
+          },
+          confirmpassword: {
+            rules: [{
+              required: true, message: '请重新输入登陆密码!',
+            }, {
+              validator: this.compareToFirstPassword,
+            }],
+          },
         },
         title: '操作',
         visible: false,
         model: {},
-        roleList: [],
-        selectedRole: [],
         labelCol: {
           xs: { span: 24 },
           sm: { span: 5 },
@@ -96,9 +130,6 @@
         confirmLoading: false,
         headers: {},
         form: this.$form.createForm(this),
-        url: {
-          userId: '/sys/user/generateUserId', // 引入生成添加用户情况下的url
-        },
       }
     },
     created () {
@@ -118,7 +149,7 @@
         this.modaltoggleFlag = !this.modaltoggleFlag;
       },
       refresh () {
-          this.packageId = ''
+          this.entityId = ''
       },
       add () {
         this.refresh()
@@ -127,18 +158,17 @@
       edit (record) {
         this.resetScreenSize() // 调用此方法,根据屏幕宽度自适应调整抽屉的宽度
         this.form.resetFields()
-        this.packageId = record.id
+        this.entityId = record.id
         this.visible = true
         this.model = Object.assign({}, record)
         this.$nextTick(() => {
-          this.form.setFieldsValue(pick(this.model, 'packageName', 'status', 'packagePrice', 'description'))
+          this.form.setFieldsValue(this.model)
         })
       },
       close () {
         this.$emit('close')
         this.visible = false
         this.disableSubmit = false
-        this.selectedRole = []
       },
       handleSubmit () {
         const that = this
@@ -148,9 +178,9 @@
             that.confirmLoading = true
             let formData = Object.assign(this.model, values)
             if (!this.model.id) {
-              formData.id = this.packageId
+              formData.id = this.entityId
             }
-            let obj = !this.model.id ? addPackage(formData) : editPackage(formData)
+            let obj = !this.model.id ? addEnterprise(formData) : editEnterprise(formData)
             obj.then((res) => {
               if (this.$isAjaxSuccess(res.code)) {
                 that.$message.success(res.message)
@@ -173,7 +203,28 @@
         const value = e.target.value
         this.confirmDirty = this.confirmDirty || !!value
       },
+      validateToNextPassword  (rule, value, callback) {
+        const form = this.form
+        const confirmpassword = form.getFieldValue('confirmpassword')
 
+        if (value && confirmpassword && value !== confirmpassword) {
+          callback('两次输入的密码不一样！')
+        }
+        if (value && this.confirmDirty) {
+          form.validateFields(['confirm'], {
+            force: true
+          })
+        }
+        callback()
+      },
+      compareToFirstPassword (rule, value, callback) {
+        const form = this.form
+        if (value && value !== form.getFieldValue('password')) {
+          callback('两次输入的密码不一样！')
+        } else {
+          callback()
+        }
+      },
       normFile (e) {
         if (Array.isArray(e)) {
           return e
