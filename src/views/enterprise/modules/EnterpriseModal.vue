@@ -59,7 +59,6 @@
 
         <a-form-item label="备注" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-textarea placeholder="请输入备注" auto-size v-decorator="[ 'memo']" :readOnly="disableSubmit" />
-          <!-- <a-input placeholder="请输入备注" v-decorator="[ 'memo']" /> -->
         </a-form-item>
 
       </a-form>
