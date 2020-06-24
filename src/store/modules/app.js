@@ -11,6 +11,7 @@ import {
   DEFAULT_CONTENT_WIDTH_TYPE,
   DEFAULT_MULTI_TAB,
   DEFAULT_FIXED_MULTITAB,
+  DEFAULT_ISACTION_BREADCRUMB,
   SYSTEM_SETTING
 } from '@/store/mutation-types'
 
@@ -30,6 +31,7 @@ const app = {
     weak: false,
     multiTab: true,
     fixedMultiTab: false,
+    isActionBreadcrumb: true,
     setting: {}
   },
   mutations: {
@@ -85,6 +87,10 @@ const app = {
       Vue.ls.set(DEFAULT_FIXED_MULTITAB, bool)
       state.fixedMultiTab = bool
     },
+    TOGGLE_ISACTION_BREADCRUMB: (state, bool) => {
+      Vue.ls.set(DEFAULT_ISACTION_BREADCRUMB, bool)
+      state.isActionBreadcrumb = bool
+    },
     GET_SYSTEM_SETTING: (state, setting) => {
       window.localStorage.setItem(SYSTEM_SETTING, setting)
       state.setting = setting
@@ -132,6 +138,9 @@ const app = {
     },
     ToggleFixedMultiTab ({ commit }, bool) {
       commit('TOGGLE_FIXED_MULTITAB', bool)
+    },
+    ToggleIsActionBreadcrumb ({ commit }, bool) {
+      commit('TOGGLE_ISACTION_BREADCRUMB', bool)
     },
     GetSystemSetting ({ commit }) {
       return new Promise((resolve, reject) => {

@@ -14,6 +14,7 @@ const getters = {
   userInfo: state => { state.user.info = Vue.ls.get(USER_INFO); return state.user.info },
   addRouters: state => state.permission.addRouters,
   multiTab: state => state.app.multiTab,
+  isActionBreadcrumb: state => state.app.isActionBreadcrumb,
   lang: state => state.i18n.lang
 }
 

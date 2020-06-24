@@ -16,6 +16,7 @@ const mixin = {
       sidebarOpened: state => state.app.sidebar,
       multiTab: state => state.app.multiTab,
       fixedMultiTab: state => state.app.fixedMultiTab,
+      isActionBreadcrumb: state => state.app.isActionBreadcrumb
     })
   },
   methods: {
