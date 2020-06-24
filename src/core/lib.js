@@ -17,6 +17,8 @@ import MultiTab from '@/components/MultiTab'
 // util
 import { isAjaxSuccess } from '@/utils/util'
 
+import event from './events'
+
 // global filter
 import '@/utils/filter'
 
@@ -26,3 +28,5 @@ Vue.use(MultiTab)
 Vue.use(VueStorage, config.storageOptions)
 
 Vue.prototype.$isAjaxSuccess = isAjaxSuccess
+
+Vue.prototype.$events = event

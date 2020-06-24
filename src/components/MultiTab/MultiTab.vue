@@ -54,6 +54,7 @@ export default {
       this.fullPathList.push(this.homeIndex.path)
     }
 
+    if (this.$route.meta.hidden) return
     this.pages.push(this.$route)
     this.fullPathList.push(this.$route.fullPath)
     this.selectedLastPath()

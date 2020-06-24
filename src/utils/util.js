@@ -89,6 +89,11 @@ export function generateIndexRouter (data) {
     },
     redirect: '/dashboard/analysis',
     children: [
+      {
+        path: '/refresh',
+        component: () => import('@components/tools/Refresh.vue'),
+        hidden: true
+      },
       ...generateChildRouters(data)
     ]
   }, {
@@ -128,7 +133,8 @@ function generateChildRouters (data) {
         icon: item.meta.icon,
         url: item.meta.url,
         permissionList: item.meta.permissionList,
-        keepAlive: item.meta.keepAlive
+        keepAlive: item.meta.keepAlive,
+        hidden: item.hidden
       }
     }
     if (item.alwaysShow) {
