@@ -138,6 +138,18 @@ export default [
         },
         "name": "service-approval",
         "id": "4r915b2769fc80648e92d04e84ca059d"
+      },
+      {
+        "path": "/service/approval/detail",
+        "component": "service/ServiceApprovalDetail",
+        "route": "1",
+        "meta": {
+          "keepAlive": false,
+          "title": "审批详情"
+        },
+        "hidden": true,
+        "name": "service-approval-detail",
+        "id": "4r915b2769fc80648e92d04e84ca059d"
       }
     ],
     "meta": {
