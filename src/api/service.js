@@ -24,11 +24,18 @@ const delEnterprise = (params) => deleteAction(_PREFIX + '/mp/delPackage', param
 // 套餐列表
 const getPackageList = (params) => getAction(_PREFIX + '/mp/getBindedPackage', params)
 
+////// 服务管理
+
+// 服务内容
+const getServiceList = (params) => getAction(_PREFIX + '/Svc/getSvcList', params)
+
 export {
   getEnterpriseList,
   getEnterpriseDetail,
   addEnterprise,
   editEnterprise,
   delEnterprise,
-  getPackageList
+  getPackageList,
+
+  getServiceList
 }
