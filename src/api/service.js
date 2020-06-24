@@ -2,7 +2,7 @@ import { getAction, postAction, deleteAction } from '@/utils/ajax'
 
 const _PREFIX = '/cpc'
 
-////// 机构模块
+////// 机构管理模块
 
 // 获取机构列表
 const getEnterpriseList = (params) => getAction(_PREFIX + '/mp/getPackageList', params)
@@ -19,10 +19,16 @@ const editEnterprise = (params) => postAction(_PREFIX + '/depart/editDepartAdmin
 // 删除机构
 const delEnterprise = (params) => deleteAction(_PREFIX + '/mp/delPackage', params)
 
+/////// 套餐管理模块
+
+// 套餐列表
+const getPackageList = (params) => getAction(_PREFIX + '/mp/getBindedPackage', params)
+
 export {
   getEnterpriseList,
   getEnterpriseDetail,
   addEnterprise,
   editEnterprise,
-  delEnterprise
+  delEnterprise,
+  getPackageList
 }
