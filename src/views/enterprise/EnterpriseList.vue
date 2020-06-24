@@ -68,7 +68,7 @@
         ref="table"
         bordered
         size="middle"
-        rowKey="customerId"
+        rowKey="id"
         :columns="columns"
         :dataSource="dataSource"
         :pagination="ipagination"
