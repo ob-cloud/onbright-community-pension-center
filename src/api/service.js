@@ -29,6 +29,9 @@ const getPackageList = (params) => getAction(_PREFIX + '/mp/getBindedPackage', p
 // 服务内容
 const getServiceList = (params) => getAction(_PREFIX + '/Svc/getSvcList', params)
 
+// 服务记录
+const getServiceRecordList = (params) => getAction(_PREFIX + '/Svc/getSvcRecordList', params)
+
 export {
   getEnterpriseList,
   getEnterpriseDetail,
@@ -37,5 +40,6 @@ export {
   delEnterprise,
   getPackageList,
 
-  getServiceList
+  getServiceList,
+  getServiceRecordList
 }

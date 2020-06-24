@@ -117,6 +117,18 @@ export default [
         "id": "4r915b2769fc80648e92d04e84ca059d"
       },
       {
+        "path": "/service/record/detail",
+        "component": "service/ServiceRecordDetail",
+        "route": "1",
+        "meta": {
+          "keepAlive": false,
+          "title": "服务详情"
+        },
+        "hidden": true,
+        "name": "service-record-detail",
+        "id": "4r915b2769fc80648e92d04e84ca059d"
+      },
+      {
         "path": "/service/approval",
         "component": "service/ServiceApproval",
         "route": "1",
