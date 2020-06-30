@@ -165,14 +165,14 @@
           {
             title: '姓名',
             align: 'center',
-            dataIndex: 'customerName',
+            dataIndex: 'name',
             width: 120
           },
           {
             title: '性别',
             align: 'center',
             width: 100,
-            dataIndex: 'status',
+            dataIndex: 'gender',
             customRender (t) {
               const sexMap = { 1: '男', 2: '女'}
               return sexMap[t] || ''
@@ -183,19 +183,19 @@
             align: 'center',
             width: 120,
             sorter: true,
-            dataIndex: 'contact'
+            dataIndex: 'age'
           },
           {
             title: '民族',
             align: 'center',
             width: 100,
-            dataIndex: 'mobile'
+            dataIndex: 'nation'
           },
           {
             title: '状态',
             align: 'center',
             width: 100,
-            dataIndex: 'accountStatus',
+            dataIndex: 'status',
             customRender (t) {
               const sexMap = {1: '在驻', 2: '退驻'}
               return sexMap[t] || ''
@@ -205,13 +205,13 @@
             title: '床位',
             align: 'center',
             width: 100,
-            dataIndex: 'mobile'
+            dataIndex: 'bedNum'
           },
           {
             title: '地址',
             align: 'center',
             width: 100,
-            dataIndex: 'mobile'
+            dataIndex: 'addr'
           },
           {
             title: '入驻时间',
@@ -229,9 +229,9 @@
           }
         ],
         url: {
-          list: '/accp/mp/getConsumerList',
-          delete: '/accp/mp/delConsumerDetail',
-          deleteBatch: '/accp/sys/user/deleteBatch'
+          list: '/parent/getParentsList',
+          delete: '/mp/delConsumerDetail',
+          deleteBatch: '/sys/user/deleteBatch'
         },
       }
     },

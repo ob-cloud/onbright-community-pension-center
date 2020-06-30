@@ -1,6 +1,7 @@
 import { getAction, postAction, putAction, deleteAction } from '@/utils/ajax'
+import config from '@/config/defaultSettings'
 
-const _PREFIX = ''
+const _PREFIX = config.mockPrefix
 
 ////// 机构管理模块
 
