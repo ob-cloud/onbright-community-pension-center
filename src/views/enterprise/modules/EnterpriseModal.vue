@@ -79,6 +79,7 @@
   import { ACCESS_TOKEN } from '@/store/mutation-types'
   import { addEnterprise, editEnterprise } from '@/api/service'
   // import { disabledAuthFilter } from "@/utils/authFilter"
+  import md5 from 'md5'
 
   export default {
     name: 'UserModal',
@@ -152,7 +153,7 @@
       },
       add () {
         this.refresh()
-        this.edit({activitiSync: false})
+        this.edit({})
       },
       edit (record) {
         this.resetScreenSize() // 调用此方法,根据屏幕宽度自适应调整抽屉的宽度
@@ -176,10 +177,13 @@
           if (!err) {
             that.confirmLoading = true
             let formData = Object.assign(this.model, values)
-            if (!this.model.id) {
+            delete formData.confirmpassword
+            if (!that.model.id) {
               formData.id = this.entityId
+              formData.passwd = md5(formData.passwd)
+              // formData.confirmpassword = md5(formData.confirmpassword)
             }
-            let obj = !this.model.id ? addEnterprise(formData) : editEnterprise(formData)
+            let obj = !that.model.id ? addEnterprise(formData) : editEnterprise(formData)
             obj.then((res) => {
               if (this.$isAjaxSuccess(res.code)) {
                 that.$message.success(res.message)
@@ -218,23 +222,10 @@
       },
       compareToFirstPassword (rule, value, callback) {
         const form = this.form
-        if (value && value !== form.getFieldValue('password')) {
+        if (value && value !== form.getFieldValue('passwd')) {
           callback('两次输入的密码不一样！')
         } else {
           callback()
-        }
-      },
-      normFile (e) {
-        if (Array.isArray(e)) {
-          return e
-        }
-        return e && e.fileList
-      },
-      beforeUpload(file) {
-        var fileType = file.type
-        if (fileType.indexOf('image') < 0) {
-          this.$message.warning('请上传图片')
-          return false
         }
       },
       // 根据屏幕变化,设置抽屉尺寸
@@ -247,11 +238,6 @@
 </script>
 
 <style scoped>
-
-  .ant-upload-select-picture-card .ant-upload-text {
-    margin-top: 8px;
-    color: #666;
-  }
 
   .ant-table-tbody .ant-table-row td{
     padding-top:10px;

@@ -115,7 +115,7 @@
       </a-table>
     </div>
     <password-modal ref="passwordModal" @ok="passwordModalOk"></password-modal>
-    <enterprise-modal ref="modalForm"></enterprise-modal>
+    <enterprise-modal ref="modalForm" @ok="modalFormOk"></enterprise-modal>
   </a-card>
 </template>
 
@@ -196,7 +196,7 @@
           }
         ],
         url: {
-          list: '/cpc/depart/getDepartAdminList',
+          list: '/depart/getDepartAdminList',
           delete: '/accp/mp/delConsumerDetail',
           deleteBatch: '/accp/sys/user/deleteBatch'
         },

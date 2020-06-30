@@ -1,6 +1,6 @@
-import { getAction, postAction, deleteAction } from '@/utils/ajax'
+import { getAction, postAction, putAction, deleteAction } from '@/utils/ajax'
 
-const _PREFIX = '/cpc'
+const _PREFIX = ''
 
 ////// 机构管理模块
 
@@ -11,10 +11,10 @@ const getEnterpriseList = (params) => getAction(_PREFIX + '/mp/getPackageList', 
 const getEnterpriseDetail = (params) => getAction(_PREFIX + '/mp/getPackageDetail', params)
 
 // 新增机构
-const addEnterprise = (params) => postAction(_PREFIX + '/mp/addPackage', params)
+const addEnterprise = (params) => postAction(_PREFIX + '/depart/addDepartAdmin', params)
 
 // 编辑机构
-const editEnterprise = (params) => postAction(_PREFIX + '/depart/editDepartAdmin', params)
+const editEnterprise = (params) => putAction(_PREFIX + '/depart/editDepartAdmin', params)
 
 // 删除机构
 const delEnterprise = (params) => deleteAction(_PREFIX + '/mp/delPackage', params)
