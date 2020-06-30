@@ -30,3 +30,5 @@ Vue.use(VueStorage, config.storageOptions)
 Vue.prototype.$isAjaxSuccess = isAjaxSuccess
 
 Vue.prototype.$events = event
+
+Vue.prototype.$MOCKPREFIX = config.mockPrefix

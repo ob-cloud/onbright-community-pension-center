@@ -1,5 +1,5 @@
 const BASE_PREFIX = './nurse'
-const LOCAL_BASE_API = '/pro'
+const LOCAL_BASE_API = '/nurse'
 const DEV_BASE_API = BASE_PREFIX
 const TEST_BASE_API = BASE_PREFIX
 const PRO_BASE_API = BASE_PREFIX
