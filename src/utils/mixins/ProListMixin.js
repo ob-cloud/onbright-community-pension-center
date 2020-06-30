@@ -286,5 +286,23 @@ export const ProListMixin = {
       }
       window.open(window._CONFIG['domianURL'] + '/sys/common/download/' + text)
     },
+    handleActionAdd () {
+      this.$router.push({path: this.path.detail, query: { type: 1, t: Date.now() }}, () => {
+        this.$store.dispatch('ToggleMultiTab', false)
+        this.$store.dispatch('ToggleIsActionBreadcrumb', true)
+      })
+    },
+    handleActionEdit (id) {
+      this.$router.push({path: this.path.detail, query: { type: 2, id, t: Date.now() }}, () => {
+        this.$store.dispatch('ToggleMultiTab', false)
+        this.$store.dispatch('ToggleIsActionBreadcrumb', true)
+      })
+    },
+    handleActionDetail (id) {
+      this.$router.push({path: this.path.detail, query: { type: 3, id, disableSubmit: true, t: Date.now() }}, () => {
+        this.$store.dispatch('ToggleMultiTab', false)
+        this.$store.dispatch('ToggleIsActionBreadcrumb', false)
+      })
+    }
   }
 }

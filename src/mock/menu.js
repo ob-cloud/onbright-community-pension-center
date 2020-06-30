@@ -17,6 +17,18 @@ export default [
         "id": "8r915b2769fc80648e92d04e84ca059d"
       },
       {
+        "path": "/elder/list/detail",
+        "component": "elder/modules/ElderDetailModal",
+        "route": "1",
+        "meta": {
+          "keepAlive": false,
+          "title": "老人详情",
+        },
+        "hidden": true,
+        "name": "elder-list-detail",
+        "id": "8x915b2769fc80648e92d04e84ca059d"
+      },
+      {
         "path": "/elder/approve",
         "component": "elder/ElderList",
         "route": "1",

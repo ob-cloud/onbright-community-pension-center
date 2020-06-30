@@ -50,7 +50,7 @@
 
     <!-- 操作按钮区域 -->
     <div class="table-operator" style="border-top: 5px">
-      <a-button @click="handleAdd" type="primary" icon="plus">添加老人</a-button>
+      <a-button @click="handleActionAdd" type="primary" icon="plus">添加老人</a-button>
       <a-dropdown v-if="selectedRowKeys.length > 0">
         <a-menu slot="overlay" @click="handleMenuClick">
           <a-menu-item key="1">
@@ -94,7 +94,7 @@
         @change="handleTableChange"
       >
         <span slot="action" slot-scope="text, record">
-          <a @click="handleEdit(record)">编辑</a>
+          <a @click="handleActionEdit(record.id)">编辑</a>
 
           <a-divider type="vertical" />
 
@@ -107,7 +107,7 @@
                 <a href="javascript:;" @click="handlePackage(record)">消费明细</a>
               </a-menu-item>
               <a-menu-item>
-                <a href="javascript:;" @click="handleDetail(record)">详情</a>
+                <a href="javascript:;" @click="handleActionDetail(record.id)">详情</a>
               </a-menu-item>
               <a-menu-item>
                 <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
@@ -233,6 +233,9 @@
           delete: '/mp/delConsumerDetail',
           deleteBatch: '/sys/user/deleteBatch'
         },
+        path: {
+          detail: '/elder/list/detail'
+        }
       }
     },
     methods: {
