@@ -158,39 +158,39 @@
             title: '护理对象',
             align: 'center',
             width: 100,
-            dataIndex: 'elder'
+            dataIndex: 'wechatUserParentName'
           },
           {
             title: '申请时间',
             align: 'center',
             width: 100,
-            dataIndex: 'applyTime'
+            dataIndex: 'createTime'
           },
           {
             title: '护工',
             align: 'center',
             width: 150,
-            dataIndex: 'nurse'
+            dataIndex: 'nursingWorker'
           },
           {
             title: '护理时间',
             align: 'center',
             width: 150,
             sorter: true,
-            dataIndex: 'nurseTime'
+            dataIndex: 'serviceBegainTime'
           },
           {
             title: '服务商',
             align: 'center',
             width: 150,
             sorter: true,
-            dataIndex: 'provider'
+            dataIndex: 'serviceOrgName'
           },
           {
             title: '服务状态',
             align: 'center',
             width: 100,
-            dataIndex: 'serviceStatus',
+            dataIndex: 'status',
             customRender (t) {
               const Map = {0: '已完成', 1: '待受理', 2: '进行中'}
               return Map[t] || ''
@@ -200,7 +200,7 @@
             title: '派单状态',
             align: 'center',
             width: 100,
-            dataIndex: 'allocateStatus',
+            dataIndex: 'orderStatus',
             customRender (t) {
               const Map = {0: '已派单', 1: '未派单'}
               return Map[t] || ''
@@ -215,7 +215,7 @@
           }
         ],
         url: {
-          list: '/Svc/getSvcRecordList',
+          list: '/Svc//getSvcOrderList',
         },
         path: {
           detail: '/service/record/detail'
