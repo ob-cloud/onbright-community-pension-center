@@ -97,7 +97,7 @@
             </a>
             <a-menu slot="overlay">
               <a-menu-item>
-                <a href="javascript:;" @click="handleActionDetail(record)">详情</a>
+                <a href="javascript:;" @click="handleAction(record)">审批</a>
               </a-menu-item>
 
               <a-menu-item>
@@ -146,32 +146,32 @@
             title: '服务类型',
             align: 'center',
             width: 100,
-            dataIndex: 'elder'
+            dataIndex: 'serviceType'
           },
           {
             title: '服务费用',
             align: 'center',
             width: 100,
-            dataIndex: 'applyTime'
+            dataIndex: 'servicePrice'
           },
           {
             title: '申请机构',
             align: 'center',
             width: 150,
-            dataIndex: 'nurse'
+            dataIndex: 'supplier'
           },
           {
             title: '申请时间',
             align: 'center',
             width: 150,
             sorter: true,
-            dataIndex: 'nurseTime'
+            dataIndex: 'createTime'
           },
           {
             title: '审批状态',
             align: 'center',
             width: 100,
-            dataIndex: 'serviceStatus',
+            dataIndex: 'status',
             customRender (t) {
               const Map = {0: '等待审批', 1: '审批通过', 2: '审批否决', 3: '驳回审批'}
               return Map[t] || ''
@@ -186,8 +186,11 @@
           }
         ],
         url: {
-          list: '/cpc/Svc/getSvcRecordList',
+          list: '/Svc/getSvcApproveList',
         },
+        path: {
+          detail: '/service/approval/detail'
+        }
       }
     },
     methods: {
