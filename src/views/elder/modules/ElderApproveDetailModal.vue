@@ -306,16 +306,6 @@ export default {
   },
   components: { ApproveRejectModal, ApproveVetoModal },
   computed: {
-    routeList() {
-      const routes = this.$route.matched.slice(1)
-      const breadcrumb = routes.map(route => {
-        return {
-          path: route.path,
-          breadcrumbName: route.meta.title
-        }
-      })
-      return breadcrumb
-    },
     badgeStyle() {
       const Text = {1: '审批通过', 2: '审批否决', 3: '驳回审批', 0: '等待审批'}
       const Status = {1: 'success', 2: 'error', 3: 'warning', 0: 'processing'}

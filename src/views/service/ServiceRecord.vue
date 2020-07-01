@@ -105,7 +105,7 @@
             </a>
             <a-menu slot="overlay">
               <a-menu-item>
-                <a href="javascript:;" @click="handleActionDetail(record)">详情</a>
+                <a href="javascript:;" @click="handleAction(record)">详情</a>
               </a-menu-item>
 
               <a-menu-item v-if="record.allocateStatus==1">
@@ -215,8 +215,11 @@
           }
         ],
         url: {
-          list: '/cpc/Svc/getSvcRecordList',
+          list: '/Svc/getSvcRecordList',
         },
+        path: {
+          detail: '/service/record/detail'
+        }
       }
     },
     methods: {

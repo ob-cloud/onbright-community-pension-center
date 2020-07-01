@@ -182,7 +182,7 @@
             title: '服务商',
             align: 'center',
             width: 150,
-            dataIndex: 'provider'
+            dataIndex: 'supplier'
           },
           {
             title: '操作',
@@ -193,7 +193,7 @@
           }
         ],
         url: {
-          list: '/cpc/Svc/getSvcList',
+          list: '/Svc/getSvcList',
         },
       }
     },

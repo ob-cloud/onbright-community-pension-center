@@ -142,11 +142,11 @@ export default [
       },
       {
         "path": "/service/record/detail",
-        "component": "service/ServiceRecordDetail",
+        "component": "service/modules/ServiceRecordDetailModal",
         "route": "1",
         "meta": {
           "keepAlive": false,
-          "title": "服务详情"
+          "title": "服务记录详情"
         },
         "hidden": true,
         "name": "service-record-detail",
@@ -165,7 +165,7 @@ export default [
       },
       {
         "path": "/service/approval/detail",
-        "component": "service/ServiceApprovalDetail",
+        "component": "service/modules/ServiceApprovalDetailModal",
         "route": "1",
         "meta": {
           "keepAlive": false,

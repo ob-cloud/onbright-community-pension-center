@@ -40,7 +40,7 @@
         </a-form-item>
 
         <a-form-item label="服务商" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-input placeholder="请输入服务商" v-decorator="[ 'provider', {}]" :readOnly="disableSubmit" />
+          <a-input placeholder="请输入服务商" v-decorator="[ 'supplier', {}]" :readOnly="disableSubmit" />
         </a-form-item>
 
         <a-form-item label="状态" :labelCol="labelCol" :wrapperCol="wrapperCol">
