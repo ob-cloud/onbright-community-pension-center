@@ -104,7 +104,7 @@
             </a>
             <a-menu slot="overlay">
               <a-menu-item>
-                <a href="javascript:;" @click="handlePackage(record)">消费明细</a>
+                <a href="javascript:;" @click="handlePackage(record)">联系人</a>
               </a-menu-item>
               <a-menu-item>
                 <a href="javascript:;" @click="handleActionDetail(record.id)">详情</a>
@@ -116,14 +116,14 @@
               </a-menu-item>
 
               <a-menu-item v-if="record.status==1">
-                <a-popconfirm title="确定冻结吗?" @confirm="() => handleFrozen(record.id, 2, record.username)">
-                  <a>冻结</a>
+                <a-popconfirm title="确定入驻吗?" @confirm="() => handleFrozen(record.id, 2, record.username)">
+                  <a>入驻</a>
                 </a-popconfirm>
               </a-menu-item>
 
               <a-menu-item v-if="record.status==2">
-                <a-popconfirm title="确定解冻吗?" @confirm="() => handleFrozen(record.id, 1, record.username)">
-                  <a>解冻</a>
+                <a-popconfirm title="确定退驻吗?" @confirm="() => handleFrozen(record.id, 1, record.username)">
+                  <a>退驻</a>
                 </a-popconfirm>
               </a-menu-item>
             </a-menu>
