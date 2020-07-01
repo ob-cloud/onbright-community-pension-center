@@ -286,23 +286,20 @@ export const ProListMixin = {
       }
       window.open(window._CONFIG['domianURL'] + '/sys/common/download/' + text)
     },
-    handleActionAdd () {
-      this.$router.push({path: this.path.detail, query: { type: 1, t: Date.now() }}, () => {
-        this.$store.dispatch('ToggleMultiTab', false)
-        this.$store.dispatch('ToggleIsActionBreadcrumb', true)
+    handleAction (query = {}, multiTab = false, breadcrumb = false) {
+      this.$router.push({path: this.path.detail, query: { t: Date.now(), ...query }}, () => {
+        this.$store.dispatch('ToggleMultiTab', multiTab)
+        this.$store.dispatch('ToggleIsActionBreadcrumb', breadcrumb)
       })
+    },
+    handleActionAdd () {
+      this.handleAction({ type: 1 }, false, true)
     },
     handleActionEdit (id) {
-      this.$router.push({path: this.path.detail, query: { type: 2, id, t: Date.now() }}, () => {
-        this.$store.dispatch('ToggleMultiTab', false)
-        this.$store.dispatch('ToggleIsActionBreadcrumb', true)
-      })
+      this.handleAction({ type: 2, id }, false, true)
     },
     handleActionDetail (id) {
-      this.$router.push({path: this.path.detail, query: { type: 3, id, disableSubmit: true, t: Date.now() }}, () => {
-        this.$store.dispatch('ToggleMultiTab', false)
-        this.$store.dispatch('ToggleIsActionBreadcrumb', false)
-      })
+      this.handleAction({ type: 3, id, disableSubmit: true }, false, false)
     }
   }
 }

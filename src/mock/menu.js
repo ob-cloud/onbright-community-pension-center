@@ -30,13 +30,25 @@ export default [
       },
       {
         "path": "/elder/approve",
-        "component": "elder/ElderList",
+        "component": "elder/ElderApprove",
         "route": "1",
         "meta": {
           "keepAlive": false,
           "title": "入驻审批"
         },
         "name": "elder-approve",
+        "id": "8r915b2769fc80648e92d04e84ca059d"
+      },
+      {
+        "path": "/elder/approve/detail",
+        "component": "elder/modules/ElderApproveDetailModal",
+        "route": "1",
+        "meta": {
+          "keepAlive": false,
+          "title": "审批详情"
+        },
+        "hidden": true,
+        "name": "elder-approve-detail",
         "id": "8r915b2769fc80648e92d04e84ca059d"
       }
     ],
