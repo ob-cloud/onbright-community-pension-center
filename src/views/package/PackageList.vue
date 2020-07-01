@@ -158,7 +158,7 @@
           // }
         ],
         url: {
-          list: '/cpc/mp/getBindedPackage',
+          list: '/mp/getBindedPackage',
         },
       }
     },
