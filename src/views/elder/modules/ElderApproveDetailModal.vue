@@ -257,6 +257,7 @@
       </a-tab-pane>
     </a-tabs>
 
+    <approve-adopt-modal ref="approveAdoptModal"></approve-adopt-modal>
     <approve-reject-modal ref="approveRejectModal"></approve-reject-modal>
     <approve-veto-modal ref="approveVetoModal"></approve-veto-modal>
 
@@ -264,6 +265,7 @@
 </template>
 
 <script>
+import ApproveAdoptModal from './ApproveAdoptModal'
 import ApproveRejectModal from './ApproveRejectModal'
 import ApproveVetoModal from './ApproveVetoModal'
 export default {
@@ -304,7 +306,7 @@ export default {
       },
     }
   },
-  components: { ApproveRejectModal, ApproveVetoModal },
+  components: { ApproveAdoptModal, ApproveRejectModal, ApproveVetoModal },
   computed: {
     badgeStyle() {
       const Text = {1: '审批通过', 2: '审批否决', 3: '驳回审批', 0: '等待审批'}
@@ -402,7 +404,7 @@ export default {
       this.$refs.approveVetoModal.show()
     },
     handleApproveAdopt () {
-
+      this.$refs.approveAdoptModal.show()
     }
   },
 }
