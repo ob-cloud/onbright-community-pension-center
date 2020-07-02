@@ -13,7 +13,11 @@
 
           <a-col :md="6" :sm="8">
             <a-form-item label="申请时间">
-              <a-input placeholder="请选择申请时间" v-model="queryParam.createTime"></a-input>
+              <a-date-picker
+                style="width: 100%"
+                placeholder="请选择申请时间"
+                v-model="queryParam.createTime"
+              />
             </a-form-item>
           </a-col>
 
