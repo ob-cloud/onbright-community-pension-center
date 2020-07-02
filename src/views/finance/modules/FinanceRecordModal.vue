@@ -16,7 +16,7 @@
         <a-form-item label="老人姓名" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-input v-decorator="[ 'name', {}]" :readOnly="true" />
         </a-form-item>
-        <a-form-item label="护理内容" :labelCol="labelCol" :wrapperCol="wrapperCol">
+        <a-form-item label="消费内容" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-input v-decorator="[ 'serviceName', {}]" :readOnly="true" />
         </a-form-item>
         <a-form-item label="营收金额" :labelCol="labelCol" :wrapperCol="wrapperCol">

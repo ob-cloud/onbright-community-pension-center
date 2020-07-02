@@ -12,8 +12,8 @@
           </a-col>
 
           <a-col :md="6" :sm="8">
-            <a-form-item label="护理内容">
-              <a-input placeholder="请选择护理内容" v-model="queryParam.createTime"></a-input>
+            <a-form-item label="消费内容">
+              <a-input placeholder="请选择消费内容" v-model="queryParam.createTime"></a-input>
             </a-form-item>
           </a-col>
 
@@ -129,7 +129,7 @@
             dataIndex: 'name'
           },
           {
-            title: '护理内容',
+            title: '消费内容',
             align: 'center',
             width: 120,
 
