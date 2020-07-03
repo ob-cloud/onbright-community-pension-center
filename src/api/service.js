@@ -33,6 +33,37 @@ const getServiceList = (params) => getAction(_PREFIX + '/Svc/getSvcList', params
 // 服务记录
 const getServiceRecordList = (params) => getAction(_PREFIX + '/Svc/getSvcRecordList', params)
 
+/////// 楼宇
+
+// 获取楼宇树列表
+const getBuildingTreeList = (params) => getAction(_PREFIX + '/building/getBuildingTreeList', params)
+
+// 获取下拉树
+const queryIdTree = (params) => getAction(_PREFIX + '/building/queryIdTree', params)
+
+const searchByKeywords = (id) => getAction(_PREFIX + '/building/searchBy', {id})
+
+// 添加
+const addBuilding = (params) => postAction(_PREFIX + '/building/addBuilding', params)
+
+// 编辑
+const editBuilding = (params) => putAction(_PREFIX + '/building/editBuilding', params)
+
+// 删除
+const delBuilding = (params) => deleteAction(_PREFIX + '/building/delBuilding', params)
+
+// 获取床位列表
+const getBuiltBedList = (params) => getAction(_PREFIX + '/building/getBuiltBedList', params)
+
+// 添加床位
+const addBuiltBed = (params) => postAction(_PREFIX + '/building/addBuiltBed', params)
+
+// 编辑床位
+const editBuiltBed = (params) => putAction(_PREFIX + '/building/editBuiltBed', params)
+
+// 删除床位
+const delBuiltBed = (params) => deleteAction(_PREFIX + '/building/delBuiltBed', params)
+
 export {
   getEnterpriseList,
   getEnterpriseDetail,
@@ -42,5 +73,17 @@ export {
   getPackageList,
 
   getServiceList,
-  getServiceRecordList
+  getServiceRecordList,
+
+  getBuildingTreeList,
+  queryIdTree,
+  searchByKeywords,
+  addBuilding,
+  editBuilding,
+  delBuilding,
+
+  getBuiltBedList,
+  addBuiltBed,
+  editBuiltBed,
+  delBuiltBed
 }
