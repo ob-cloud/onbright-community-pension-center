@@ -5,7 +5,7 @@ import { ACCESS_TOKEN, USER_NAME, USER_INFO, USER_AUTH } from '@/store/mutation-
 import { welcome, isAjaxSuccess } from '@/utils/util'
 
 // TODO MOCK MENU
-import Menu from '@/mock/menu'
+// import Menu from '@/mock/menu'
 
 const user = {
   state: {
@@ -72,7 +72,7 @@ const user = {
             reject()
           }
           // TODO DELETE .concat(menu)
-          const menu = response.result.menu.concat(Menu)
+          const menu = response.result.menu // .concat(Menu)
           const auth = response.result.auth
 
           sessionStorage.setItem(USER_AUTH, JSON.stringify(auth))
@@ -82,7 +82,7 @@ const user = {
             reject(new Error('getPermissionList: permissions must be a non-null array!'))
           }
           // TODO DELETE
-          response.result.menu = menu
+          // response.result.menu = menu
           resolve(response)
         }).catch(error => {
           reject(error)
