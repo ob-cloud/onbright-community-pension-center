@@ -41,6 +41,20 @@
           <a-input placeholder="请输入机构名称" v-decorator="[ 'departName', validatorRules.departName]" :readOnly="disableSubmit" />
         </a-form-item>
 
+        <a-form-item label="角色分配" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <a-select
+            mode="multiple"
+            style="width: 100%"
+            placeholder="请选择用户角色"
+            optionFilterProp="children"
+            v-model="selectedRole"
+          >
+            <a-select-option v-for="(role,roleindex) in roleList" :key="roleindex.toString()" :value="role.id">
+              {{ role.roleName }}
+            </a-select-option>
+          </a-select>
+        </a-form-item>
+
         <a-form-item label="联系人" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-input placeholder="请输入联系人" v-decorator="[ 'contact', validatorRules.contact]" :readOnly="disableSubmit" />
         </a-form-item>
@@ -79,6 +93,8 @@
   import { ACCESS_TOKEN } from '@/store/mutation-types'
   import { addEnterprise, editEnterprise } from '@/api/service'
   // import { disabledAuthFilter } from "@/utils/authFilter"
+  import { queryAllRole, queryUserRole } from '@/api/system'
+
   import md5 from 'md5'
 
   export default {
@@ -127,6 +143,8 @@
           xs: { span: 24 },
           sm: { span: 16 },
         },
+        selectedRole: [],
+        roleList: [],
         confirmLoading: false,
         headers: {},
         form: this.$form.createForm(this),
@@ -158,9 +176,13 @@
       edit (record) {
         this.resetScreenSize() // 调用此方法,根据屏幕宽度自适应调整抽屉的宽度
         this.form.resetFields()
+        this.initialRoleList()
         this.entityId = record.id
         this.visible = true
         this.model = Object.assign({}, record)
+        if (this.entityId) {
+          this.loadUserRoles(this.entityId)
+        }
         this.$nextTick(() => {
           this.form.setFieldsValue(this.model)
         })
@@ -169,6 +191,7 @@
         this.$emit('close')
         this.visible = false
         this.disableSubmit = false
+        this.selectedRole = []
       },
       handleSubmit () {
         const that = this
@@ -178,6 +201,7 @@
             that.confirmLoading = true
             let formData = Object.assign(this.model, values)
             delete formData.confirmpassword
+            formData.selectedroles = this.selectedRole.length > 0 ? this.selectedRole.join(',') : ''
             if (!that.model.id) {
               formData.id = this.entityId
               formData.passwd = md5(formData.passwd)
@@ -232,6 +256,24 @@
       resetScreenSize() {
         let screenWidth = document.body.clientWidth
         this.drawerWidth = screenWidth < 500 ? screenWidth : 700
+      },
+      initialRoleList () {
+        queryAllRole({ column: '', order: true }).then((res) => {
+          if (this.$isAjaxSuccess(res.code)) {
+            this.roleList = res.result.records
+          } else {
+            console.log(res.message)
+          }
+        })
+      },
+      loadUserRoles (userid) {
+        queryUserRole({ userid }).then((res) => {
+          if (this.$isAjaxSuccess(res.code)) {
+            this.selectedRole = res.result
+          } else {
+            console.log(res.message)
+          }
+        })
       },
     }
   }

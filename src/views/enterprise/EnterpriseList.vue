@@ -13,11 +13,12 @@
 
           <a-col :md="6" :sm="8">
             <a-form-item label="添加时间">
-              <a-date-picker
+              <!-- <a-date-picker
                 style="width: 100%"
                 placeholder="请选择添加时间"
                 v-model="queryParam.createTime"
-              />
+              /> -->
+              <pro-date style="width: 100%" v-model="queryParam.createTime" :showTime="true" date-format="YYYY-MM-DD HH:mm:ss" placeholder="请选择添加时间"></pro-date>
             </a-form-item>
           </a-col>
 
@@ -128,13 +129,15 @@
   import { ProListMixin } from '@/utils/mixins/ProListMixin'
   import PasswordModal from './modules/PasswordModal'
   import EnterpriseModal from './modules/EnterpriseModal'
+  import ProDate from '@/components/Pro/ProDate'
 
   export default {
     name: 'EnterpriseList',
     mixins: [ ProListMixin ],
     components: {
       PasswordModal,
-      EnterpriseModal
+      EnterpriseModal,
+      ProDate
     },
     data() {
       return {
