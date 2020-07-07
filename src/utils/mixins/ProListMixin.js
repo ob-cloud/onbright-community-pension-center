@@ -166,15 +166,14 @@ export const ProListMixin = {
         });
       }
     },
-    handleDelete (id) {
+    handleDelete (id, idProperty = '') {
       if (!this.url.delete) {
         this.$message.error('请设置url.delete属性!')
         return
       }
       let that = this
-      deleteAction(that.$MOCKPREFIX + that.url.delete, {
-        id: id
-      }).then((res) => {
+      const params = idProperty ? { [idProperty]: id } : { id }
+      deleteAction(that.$MOCKPREFIX + that.url.delete, params).then((res) => {
         if (this.$isAjaxSuccess(res.code)) {
           that.$message.success(res.message)
           that.loadData()
@@ -295,11 +294,13 @@ export const ProListMixin = {
     handleActionAdd () {
       this.handleAction({ type: 1 }, false, true)
     },
-    handleActionEdit (id) {
-      this.handleAction({ type: 2, id }, false, true)
+    handleActionEdit (id, idProperty = '') {
+      const params = idProperty ? { [idProperty]: id } : { id }
+      this.handleAction({ type: 2, ...params }, false, true)
     },
-    handleActionDetail (id) {
-      this.handleAction({ type: 3, id, disableSubmit: true }, false, false)
+    handleActionDetail (id, idProperty = '') {
+      const params = idProperty ? { [idProperty]: id } : { id }
+      this.handleAction({ type: 3, ...params, disableSubmit: true }, false, false)
     }
   }
 }
