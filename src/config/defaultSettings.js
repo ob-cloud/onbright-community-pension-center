@@ -31,7 +31,7 @@ export default {
     name: 'ls', // name variable Vue.[ls] or this.[$ls],
     storage: 'local' // storage name session, local, memory
   },
-  mockPrefix: '/cpc',
+  mockPrefix: '',
   ///// 此下面配置忽略
   // TODO Delete
   pageOptions: {

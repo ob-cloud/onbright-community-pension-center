@@ -62,12 +62,12 @@ module.exports = {
         }
       },
      '/nurse': { // 系统基础接口
-        target: 'https://aliiot.on-bright.com/mock/13', //mock API接口系统
-        // target: 'http://192.168.200.115:8082',
+        // target: 'https://aliiot.on-bright.com/mock/13', //mock API接口系统
+        target: 'http://192.168.200.113:8082',
         ws: false,
         changeOrigin: true,
         pathRewrite: {
-          '/nurse': '/pro'  //默认所有请求都加了/pro前缀，需要去掉
+          '/nurse': '/nurse'  //默认所有请求都加了/pro前缀，需要去掉
         }
       },
       '/nurse1': {
