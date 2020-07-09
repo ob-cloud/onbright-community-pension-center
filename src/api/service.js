@@ -18,7 +18,10 @@ const addEnterprise = (params) => postAction(_PREFIX + '/depart/addDepartAdmin',
 const editEnterprise = (params) => putAction(_PREFIX + '/depart/editDepartAdmin', params)
 
 // 删除机构
-const delEnterprise = (params) => deleteAction(_PREFIX + '/mp/delPackage', params)
+const delEnterprise = (params) => deleteAction(_PREFIX + '/depart/delDepartAdmin', params)
+
+// 冻结
+const frozenBatch = (params) => deleteAction(_PREFIX + '/depart/freezeDepartAdmin', params)
 
 /////// 套餐管理模块
 
@@ -70,6 +73,8 @@ export {
   addEnterprise,
   editEnterprise,
   delEnterprise,
+  frozenBatch,
+
   getPackageList,
 
   getServiceList,
