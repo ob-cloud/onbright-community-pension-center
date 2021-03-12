@@ -286,7 +286,7 @@ export const ProListMixin = {
       window.open(window._CONFIG['domianURL'] + '/sys/common/download/' + text)
     },
     handleAction (query = {}, multiTab = false, breadcrumb = false) {
-      this.$router.push({path: this.path.detail, query: { t: Date.now(), ...query }}, () => {
+      this.$router.push({path: this.path.detail, query: { st: Date.now(), ...query }}, () => {
         this.$store.dispatch('ToggleMultiTab', multiTab)
         this.$store.dispatch('ToggleIsActionBreadcrumb', breadcrumb)
       })

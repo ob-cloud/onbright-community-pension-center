@@ -186,7 +186,8 @@
         form: this.$form.createForm(this),
         picUrl: '',
         url: {
-          fileUpload: window._CONFIG['domianURL'] + '/sys/common/upload',
+          // fileUpload: window._CONFIG['domianURL'] + '/sys/common/upload',
+          fileUpload: './nurse/sys/common/upload',
           imgerver: window._CONFIG['domianURL'] + '/sys/common/view',
           userId: '/sys/user/generateUserId', // 引入生成添加用户情况下的url
         },
@@ -219,7 +220,7 @@
           order: true
         }).then((res) => {
           if (this.$isAjaxSuccess(res.code)) {
-            this.roleList = res.result.records
+            this.roleList = res.result
           } else {
             console.log(res.message)
           }

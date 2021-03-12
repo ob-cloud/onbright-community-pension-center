@@ -45,7 +45,7 @@ export default {
     },
     confirm () {
       this.actionFn && this.actionFn()
-      this.$events.$emit('ok')
+      this.$events.$emit('ok', this)
     },
     cancel () {
       this.goback()

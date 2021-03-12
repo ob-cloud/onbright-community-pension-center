@@ -12,7 +12,8 @@ import {
   DEFAULT_MULTI_TAB,
   DEFAULT_FIXED_MULTITAB,
   DEFAULT_ISACTION_BREADCRUMB,
-  SYSTEM_SETTING
+  SYSTEM_SETTING,
+  SYS_CLIENT_TYPE
 } from '@/store/mutation-types'
 
 import { getSystemConfig } from '@/api/system'
@@ -32,6 +33,7 @@ const app = {
     multiTab: true,
     fixedMultiTab: false,
     isActionBreadcrumb: true,
+    type: 0, // 系统类型，默认中控
     setting: {}
   },
   mutations: {
@@ -94,6 +96,10 @@ const app = {
     GET_SYSTEM_SETTING: (state, setting) => {
       window.localStorage.setItem(SYSTEM_SETTING, setting)
       state.setting = setting
+    },
+    SET_SYS_CLIENT_TYPE (state, type) {
+      Vue.ls.set(SYS_CLIENT_TYPE, type)
+      state.type = type
     }
   },
   actions: {
@@ -149,6 +155,9 @@ const app = {
           resolve(response)
         }).catch(reject)
       })
+    },
+    setSysClientType ({ commit }, type) {
+      commit('SET_SYS_CLIENT_TYPE', type)
     }
   }
 }

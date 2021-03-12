@@ -1,0 +1,139 @@
+variables:
+  DEV_NGINX_SERVER_DIR: '/usr/local/nginx1159/html'
+  PRO_NGINX_SERVER_DIR: '/usr/local/nginx/html'
+  CLOUD_SERVER: 'root@47.99.107.215'
+  PRO_PROJECT_NAME: 'pension'
+  DEV_PROJECT_NAME: 'pension'
+
+# pipeline 阶段
+stages:
+  # - commit_quality
+  - setup
+  - code_quality
+  - testing
+  - building
+  - release
+  - deployment
+
+cache:
+  paths:
+    - node_modules/
+    - dist/
+
+# 安装依赖
+安装依赖:
+  stage: setup
+  cache:
+    paths:
+      - node_modules/
+  script:
+    - cnpm install --silent --no-optional
+  tags: 
+    - 31-build-shell
+
+# 代码检测
+代码校验:
+  stage: code_quality
+  script:
+    - npm run lint
+  only:  # 检查feature、develop分支代码
+    - /^feature.*$/
+    - develop
+  tags:
+    - 31-build-shell
+
+# 测试
+代码测试:
+  stage: testing
+  only:
+    - /^feature.*$/
+  script:
+    - npm run test:e2e
+  tags:
+    - 31-build-shell
+
+项目构建(building):
+  cache:
+    # paths:
+    #   - node_modules/
+    #   - dist/
+  stage: building
+  script:
+    - npm run build
+  only:
+    - master
+    - develop
+    - /^beta\/.*$/
+    - /^release\/.*$/
+  tags:
+    - 31-build-shell
+
+# 构建公共脚本（building 脚本方法）
+.deploy_script: &deploy_script
+  stage: deployment
+  tags:
+    - 31-build-shell
+
+# 部署开发分支
+开发环境(deploy:develop):
+  <<: *deploy_script
+  variables:
+    HOST_BUKET_NAME: dev
+  environment:
+    name: Development
+    url: https://aliiot.on-bright.com/$DEV_PROJECT_NAME
+  script:
+   # 创建项目目录
+    - mkdir -p $DEV_NGINX_SERVER_DIR/$DEV_PROJECT_NAME
+    - rm -rf $DEV_NGINX_SERVER_DIR/$DEV_PROJECT_NAME/*
+    - cp -rf ./dist/* $DEV_NGINX_SERVER_DIR/$DEV_PROJECT_NAME/
+  # only:
+  #   - develop
+  rules:
+  - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+高保真环境(deploy:uat):
+  <<: *deploy_script
+  environment:
+    name: Uat
+  script:
+    - echo "deploy Uat"
+  only:
+    - /^release.*$/
+
+生产环境(deploy:prod):
+  <<: *deploy_script
+  environment:
+    name: Production
+    url: https://alicloud.on-bright.com/$PRO_PROJECT_NAME
+  script:
+    - ssh $CLOUD_SERVER mkdir -p $PRO_NGINX_SERVER_DIR/$PRO_PROJECT_NAME
+    - ssh $CLOUD_SERVER rm -rf $PRO_NGINX_SERVER_DIR/$PRO_PROJECT_NAME/*
+    - scp -r ./dist/* $CLOUD_SERVER:$PRO_NGINX_SERVER_DIR/$PRO_PROJECT_NAME/
+  artifacts:
+    name: '$CI_COMMIT_REF_NAME-dist'
+    expire_in: 60 mins
+    paths:
+      - dist/
+  when: manual
+  only:
+    - master
+
+.semantic_script: &semantic_script
+  only:
+    refs:
+    - master
+    - alpha
+    - /^(([0-9]+)\.)?([0-9]+)\.x/ # This matches maintenance branches
+    - /^([0-9]+)\.([0-9]+)\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+[0-9A-Za-z-]+)?$/ # This matches pre-releases
+  before_script:
+    - cnpm i -D --silent semantic-release @commitlint/config-conventional @semantic-release/{commit-analyzer,git,changelog,gitlab-config,gitlab}
+  tags:
+    - 31-build-shell
+
+发布Release:
+  <<: *semantic_script
+  stage: release
+  script:
+    - npx semantic-release
+      

@@ -38,6 +38,10 @@ const editRole = (params) => putAction('/sys/role/edit', params)
 const checkRoleCode = (params) => getAction('/sys/role/checkRoleCode', params)
 // 查询所有角色
 const queryAllRole = (params) => getAction('/sys/role/all', params)
+
+// 查询角色的子角色
+const querySubRole = (params) => getAction('/sys/role/roleDetail', params)
+
 // 获取角色树列表
 const queryRoleTreeList = (params) => getAction('/sys/role/queryRoleTreeList', params)
 
@@ -104,6 +108,7 @@ export {
   editRole,
   checkRoleCode,
   queryAllRole,
+  querySubRole,
   queryRoleTreeList,
 
   // Permission

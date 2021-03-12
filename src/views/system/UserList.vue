@@ -138,13 +138,13 @@
                 </a-popconfirm>
               </a-menu-item>
 
-              <a-menu-item v-if="record.status==1">
-                <a-popconfirm title="确定冻结吗?" @confirm="() => handleFrozen(record.id, 2, record.username)">
+              <a-menu-item v-if="record.status===1">
+                <a-popconfirm title="确定冻结吗?" @confirm="() => handleFrozen(record.id, 0, record.username)">
                   <a>冻结</a>
                 </a-popconfirm>
               </a-menu-item>
 
-              <a-menu-item v-if="record.status==2">
+              <a-menu-item v-if="record.status===0">
                 <a-popconfirm title="确定解冻吗?" @confirm="() => handleFrozen(record.id, 1, record.username)">
                   <a>解冻</a>
                 </a-popconfirm>
@@ -236,7 +236,7 @@
             width: 80,
             dataIndex: 'status',
             customRender (t) {
-              const statusMap = {1: '正常', 2: '冻结'}
+              const statusMap = {0: '冻结', 1: '正常'}
               return statusMap[t] || ''
             }
           },

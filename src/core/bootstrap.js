@@ -12,7 +12,8 @@ import {
   DEFAULT_FIXED_SIDEMENU,
   DEFAULT_CONTENT_WIDTH_TYPE,
   DEFAULT_MULTI_TAB,
-  DEFAULT_FIXED_MULTITAB
+  DEFAULT_FIXED_MULTITAB,
+  SYS_CLIENT_TYPE
 } from '@/store/mutation-types'
 import config from '@/config/defaultSettings'
 
@@ -30,4 +31,5 @@ export default function Initializer() {
   store.commit('TOGGLE_MULTI_TAB', Vue.ls.get(DEFAULT_MULTI_TAB, config.multiTab))
   store.commit('TOGGLE_FIXED_MULTITAB', Vue.ls.get(DEFAULT_FIXED_MULTITAB, config.fixedMultiTab))
   store.commit('SET_TOKEN', Vue.ls.get(ACCESS_TOKEN))
+  store.commit('SET_SYS_CLIENT_TYPE', Vue.ls.get(SYS_CLIENT_TYPE, config.systemType))
 }

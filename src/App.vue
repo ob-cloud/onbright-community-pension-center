@@ -19,6 +19,11 @@ export default {
   },
   mounted () {
 
+  },
+  watch: {
+    '$route' (to) {
+      console.log('------', to)
+    }
   }
 }
 </script>

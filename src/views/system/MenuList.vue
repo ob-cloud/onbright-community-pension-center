@@ -106,6 +106,10 @@
       dataIndex: 'sortNo',
       key: 'sortNo'
     }, {
+      title: '描述',
+      dataIndex: 'description',
+      key: 'description'
+    }, {
       title: '操作',
       dataIndex: 'action',
       scopedSlots: { customRender: 'action' },

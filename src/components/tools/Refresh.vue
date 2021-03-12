@@ -5,7 +5,7 @@
 export default {
   beforeRouteEnter(to, from, next) {
     next(vm => {
-      vm.$router.replace({path: from.path, query: {...from.query, t: Date.now()}, params: {...from.params}})
+      vm.$router.replace({path: from.path, query: {...from.query, st: Date.now()}, params: {...from.params}})
     })
   }
 }

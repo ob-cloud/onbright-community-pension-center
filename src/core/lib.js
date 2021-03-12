@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueStorage from 'vue-ls'
 import config from '@/config/defaultSettings'
+import * as PathObj from '@/config/path.config'
 
 // styles
 import '@/assets/styles/global.less'
@@ -32,3 +33,5 @@ Vue.prototype.$isAjaxSuccess = isAjaxSuccess
 Vue.prototype.$events = event
 
 Vue.prototype.$MOCKPREFIX = config.mockPrefix
+
+Vue.prototype.$routePath = PathObj

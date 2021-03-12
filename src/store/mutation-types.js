@@ -15,8 +15,11 @@ export const DEFAULT_ISACTION_BREADCRUMB = 'DEFAULT_ISACTION_BREADCRUMB'
 export const USER_NAME = 'USER_NAME'
 export const USER_INFO = 'USER_INFO'
 export const USER_AUTH = 'USER_AUTH'
+export const SYS_BUTTON_AUTH = 'SYS_BUTTON_AUTH'
 
 export const SYSTEM_SETTING = 'SYSTEM_SETTING'
+
+export const SYS_CLIENT_TYPE = 'SYS_CLIENT_TYPE'
 
 export const CONTENT_WIDTH_TYPE = {
   Fluid: 'Fluid',

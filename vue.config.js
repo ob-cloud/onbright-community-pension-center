@@ -51,28 +51,30 @@ module.exports = {
   },
 
   devServer: {
-    port: 3001,
+    port: 3003,
     proxy: {
-      '/nurse/cpc': { // 中台接口
-        target: 'https://aliiot.on-bright.com/mock/42', //mock API接口系统
-        ws: false,
-        changeOrigin: true,
-        pathRewrite: {
-          '^/nurse/cpc': '/cpc'  //默认所有请求都加了/pro前缀，需要去掉
-        }
-      },
-     '/nurse': { // 系统基础接口
-        // target: 'https://aliiot.on-bright.com/mock/13', //mock API接口系统
-        target: 'http://192.168.200.150:8082',
-        ws: false,
-        changeOrigin: true,
-        pathRewrite: {
-          '/nurse': '/nurse'  //默认所有请求都加了/pro前缀，需要去掉
-        }
-      },
-      '/nurse1': {
-        target: 'http://192.168.200.241/nurse',
-        // target: 'https://aliiot.on-bright.com/nurse',
+      // /nurse/accp
+    //   '/nurse/accp': { // 中台接口
+    //     target: 'https://aliiot.on-bright.com/mock/37', //mock API接口系统
+    //     ws: false,
+    //     changeOrigin: true,
+    //     pathRewrite: {
+    //       '^/nurse/accp': '/accp'  //默认所有请求都加了/pro前缀，需要去掉
+    //     }
+    //   },
+    //   // /nurse
+    //  '/nurse': { // 系统基础接口
+    //     // target: 'https://aliiot.on-bright.com/mock/13/pro', //mock API接口系统
+    //     target: 'http://192.168.200.162:8082',
+    //     ws: false,
+    //     changeOrigin: true,
+    //     pathRewrite: {
+    //       '/nurse': '/nurse'  //默认所有请求都加了/pro前缀，需要去掉
+    //     }
+    //   },
+      '/nurse': {
+        // target: 'http://192.168.200.241/nurse',
+        target: 'https://aliiot.on-bright.com/api/nurse',
         ws: false,
         changeOrigin: true,
         pathRewrite: {

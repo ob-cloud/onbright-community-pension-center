@@ -80,6 +80,10 @@
             </a-input>
           </a-form-item>
 
+          <a-form-item v-show="localMenuType==0" :labelCol="labelCol" :wrapperCol="wrapperCol" label="菜单描述">
+            <a-input placeholder="请输入菜单描述" v-decorator="[ 'description',{}]" :readOnly="disableSubmit" />
+          </a-form-item>
+
           <a-form-item v-show="show" :labelCol="labelCol" :wrapperCol="wrapperCol" label="排序">
             <a-input-number placeholder="请输入菜单排序" style="width: 200px" v-decorator="[ 'sortNo',validatorRules.sortNo]" :readOnly="disableSubmit" />
           </a-form-item>
@@ -214,7 +218,7 @@
 
         this.visible = true
         this.loadTree()
-        let fieldsVal = pick(this.model, 'name', 'perms', 'permsType', 'component', 'url', 'sortNo', 'menuType', 'status')
+        let fieldsVal = pick(this.model, 'name', 'perms', 'permsType', 'component', 'url', 'sortNo', 'menuType', 'status', 'description')
         this.$nextTick(() => {
           this.form.setFieldsValue(fieldsVal)
         })
@@ -233,6 +237,8 @@
             this.model.route = this.routeSwitch
             this.model.keepAlive = this.isKeepalive
             this.model.internalOrExternal = this.internalOrExternal
+            this.model.children = undefined
+            this.model.key = undefined
             let formData = Object.assign(this.model, values)
             if ((formData.menuType === 1 || formData.menuType === 2) && !formData.parentId) {
               this.validateStatus = 'error'

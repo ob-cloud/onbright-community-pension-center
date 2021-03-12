@@ -13,9 +13,7 @@
           </a-col>
           <a-col :md="10" :sm="12">
             <a-form-item label="创建时间" :labelCol="{span: 5}" :wrapperCol="{span: 18, offset: 1}">
-              <pro-date v-model="queryParam.createTime_begin" :showTime="true" format="YYYY-MM-DD HH:mm:ss" style="width:45%" placeholder="请选择开始时间" />
-              <span style="width: 10px;">~</span>
-              <pro-date v-model="queryParam.createTime_end" :showTime="true" format="YYYY-MM-DD HH:mm:ss" style="width:45%" placeholder="请选择结束时间" />
+              <pro-date v-model="queryParam.createTime" :showTime="true" format="YYYY-MM-DD HH:mm:ss" style="width:100%" placeholder="请选择创建时间" />
             </a-form-item>
           </a-col>
           <span style="float: left; overflow: hidden;" class="table-page-search-submitButtons">
@@ -160,7 +158,7 @@
             align: 'center',
             sorter: true,
             customRender(t) {
-              return dayjs(new Date(t)).format('YYYY-MM-DD HH:mm:ss')
+              return t && dayjs(new Date(t)).format('YYYY-MM-DD HH:mm:ss')
             }
           },
           {

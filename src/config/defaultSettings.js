@@ -24,10 +24,11 @@ export default {
   colorWeak: false,
   multiTab: true,
   fixedMultiTab: true,
+  systemType: 0, // 系统类型，0 - 中台， 1 - 养老， 2 - 供应商
   production: process.env.NODE_ENV === 'production' && process.env.VUE_APP_PREVIEW !== 'true',
   // vue-ls options
   storageOptions: {
-    namespace: 'CPC__', // key prefix
+    namespace: 'ACCP__', // key prefix
     name: 'ls', // name variable Vue.[ls] or this.[$ls],
     storage: 'local' // storage name session, local, memory
   },
@@ -35,8 +36,10 @@ export default {
   ///// 此下面配置忽略
   // TODO Delete
   pageOptions: {
-    logo: 'http://placehold.it/50x50/333/fff/?text=pro',
-    title: '社区养老中心',
+    logo: ['http://placehold.it/50x50/333/fff/?text=ccp', 'http://placehold.it/50x50/333/fff/?text=cpc', 'http://placehold.it/50x50/333/fff/?text=ssc'],
+    title: ['昂宝中控平台', '社区养老中心', '供应商服务中心', '昂宝养老平台'],
+    background: ['ccp.jpg', 'cpc.jpg', 'ssc.jpg'],
+    brand: ['ccp_logo.png', 'cpc_logo.png', 'ssc_logo.png'],
     // description: 'On-Bright Admin Pro',
     hasFooter: false, // hasFooter 为 true 时， 下面脚注配置生效
     copyright: 'OnBright.tld',

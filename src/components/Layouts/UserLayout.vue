@@ -14,6 +14,28 @@ export default {
   beforeDestroy () {
     document.body.classList.remove('userLayout', 'simple')
   },
+  computed: {
+    systemTitle () {
+      const type = this.$store.getters.sysClientType
+      return config.pageOptions.title[type] || config.pageOptions.title[3]
+    },
+    systemLogo () {
+      const type = this.$store.getters.sysClientType
+      return config.pageOptions.logo[type] || config.pageOptions.logo[3]
+    },
+    systemBg () {
+      const type = this.$store.getters.sysClientType
+      console.log(config.pageOptions.background[type])
+      const url = require('@/assets/img/' + config.pageOptions.background[type])
+      console.log(url)
+      return {
+        'background-image': `url(${url})`,
+        'background-size': 'cover',
+        'background-repeat': 'no-repeat',
+        'background-position': 'center'
+      }
+    }
+  },
   methods: {
     renderHeader () {
       return (
@@ -21,11 +43,11 @@ export default {
           <div class="header">
             <a href="/">
               {
-                config.pageOptions.logo && (
-                  <img src={config.pageOptions.logo} class="logo" alt="logo" />
+                this.systemLogo && (
+                  <img src={this.systemLogo} class="logo" alt="logo" />
                 )
               }
-              <span class="title">{config.pageOptions.title || 'Admin-Pro'}</span>
+              <span class="title">{this.systemTitle}</span>
             </a>
           </div>
           {
@@ -61,7 +83,7 @@ export default {
   },
   render () {
     return (
-      <div id="userLayout" class={['user-layout-wrapper', this.device]}>
+      <div id="userLayout" class={['user-layout-wrapper', this.device]} style={this.systemBg}>
         <div class="container">
           {this.renderHeader()}
           <route-view></route-view>
